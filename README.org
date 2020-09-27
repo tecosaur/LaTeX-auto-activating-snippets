@@ -2,6 +2,26 @@
 
 A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activating-snippets][auto-activatnig-snippets engine]].
 
+* Sample Configuration
+#+BEGIN_SRC emacs-lisp
+(use-package! latex-auto-activating-snippets
+  :after latex ; auctex's LaTeX package
+  :config ; do whatever here
+  (aas-set-snippets 'latex-mode
+                    ;; set condition!
+                    :cond #'texmathp ; expand only while in math
+                    "supp" "\\supp"
+                    "On" "O(n)"
+                    "O1" "O(1)"
+                    "Olog" "O(\\log n)"
+                    "Olon" "O(n \\log n)"
+                    ;; bind to functions!
+                    "//" (lambda () (interactive)
+                             (yas-expand-snippet "\\frac{$1}{$2}$0"))
+                    "Span" (lambda () (interactive)
+                             (yas-expand-snippet "\\Span($1)$0"))))
+#+END_SRC
+
 * Credits
 [[https://github.com/cdominik/cdlatex][cdlatex]] and this [[https://castel.dev/post/lecture-notes-1/][very nice blog post]].
 * Snippets
