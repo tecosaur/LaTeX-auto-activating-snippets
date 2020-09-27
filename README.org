@@ -1,5 +1,11 @@
 #+TITLE: LaTeX Snippets
 
+A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activating-snippets][auto-activatnig-snippets engine]].
+
+* Credits
+[[https://github.com/cdominik/cdlatex][cdlatex]] and this [[https://castel.dev/post/lecture-notes-1/][very nice blog post]].
+* Snippets
+** Basic set
 #+BEGIN_SRC emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-basic-snippets)
 #+END_SRC
@@ -169,6 +175,8 @@
 | ~;.~     | \cdot               |
 
 
+
+** Annoying Subscripts
 #+BEGIN_SRC emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-subscript-snippets)
 #+END_SRC
@@ -205,6 +213,7 @@
 (aas--format-doc-to-org 'laas-frac-snippet)
 #+END_SRC
 
+** The infamous fraction
 #+RESULTS:
 : Frac snippet. Expand in maths when there~s something to frac on on the left.
 
@@ -220,6 +229,8 @@
 (aas--format-doc-to-org 'laas-accent-snippets)
 #+END_SRC
 
+
+** Simpler Accents
 #+RESULTS:
 : A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.
 
