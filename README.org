@@ -1,6 +1,6 @@
 #+TITLE: LaTeX Snippets
 
-A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activating-snippets][auto-activatnig-snippets engine]].
+A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activating-snippets][auto-activating-snippets engine]].
 
 * Sample Configuration
 #+BEGIN_SRC emacs-lisp
