@@ -344,6 +344,16 @@ insert a new subscript (e.g a -> a_1)."
                                          (laas-wrap-previous-object expp)))))
   "A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.")
 
+(defun laas--no-backslash-before-point? ()
+  "Check that the char before `point' is not a backslash."
+  (/= (char-before) ?\\))
+
+(add-hook 'LaTeX-mode-hook
+          (lambda ()
+            (add-hook 'aas-global-condition-hook
+                      #'laas--no-backslash-before-point?
+                      nil 'local)))
+
 (apply #'aas-set-snippets 'latex-mode laas-basic-snippets)
 (apply #'aas-set-snippets 'latex-mode laas-subscript-snippets)
 (apply #'aas-set-snippets 'latex-mode laas-frac-snippet)
