@@ -58,7 +58,9 @@ insert a new subscript (e.g a -> a_1)."
 
 (defun laas-auto-script-condition ()
   "Condition used for auto-sub/superscript snippets."
-  (cond ((and (or (= (char-before (1- (point))) ?_)
+  (cond ((or (bobp) (= (1- (point)) (point-min)))
+         nil)
+        ((and (or (= (char-before (1- (point))) ?_)
                   (= (char-before (1- (point))) ?^))
               (/= (char-before) ?{))
          'extended-sub)
