@@ -75,12 +75,14 @@ insert a new subscript (e.g a -> a_1)."
      ((memq (char-before) '(?\) ?\]))
       (backward-sexp)
       (point))
-     ((and (= (char-before) ?})
-           (save-excursion
-             (cl-loop do (backward-sexp)
-                      while (= (char-before) ?}))
-             (looking-back "\\\\[A-Za-z@*]+" (line-beginning-position))))
-      (match-beginning 0))
+     ((= (char-before) ?})
+      (save-excursion
+        (cl-loop do (backward-sexp)
+                 while (= (char-before) ?}))
+        ;; try to catch the marco if the braces belong to one
+        (if (looking-back "\\\\[A-Za-z@*]+" (line-beginning-position))
+            (match-beginning 0)
+          (point))))
      ((or (<= ?a (char-before) ?z)
           (<= ?A (char-before) ?Z)
           (<= ?0 (char-before) ?9))
