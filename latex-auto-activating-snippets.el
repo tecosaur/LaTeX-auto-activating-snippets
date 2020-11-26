@@ -86,6 +86,10 @@ insert a new subscript (e.g a -> a_1)."
           (<= ?0 (char-before) ?9))
       (backward-word)
       (when (= (char-before) ?\\) (backward-char))
+      (when (or (= (char-before) ?_)
+                (= (char-before) ?^))
+        (backward-char)
+        (goto-char (laas-identify-adjacent-tex-object))) ; yay recursion
       (point)))))
 
 (defun laas-wrap-previous-object (tex-command)
