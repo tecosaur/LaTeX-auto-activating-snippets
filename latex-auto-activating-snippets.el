@@ -203,6 +203,8 @@ insert a new subscript (e.g a -> a_1)."
    "sin"  "\\sin"
    "star"  "\\star"
    "gcd"   "\\gcd"
+   "min"  "\\min"
+   "max"  "\\max"
 
    "CC" "\\CC"
    "FF" "\\FF"
