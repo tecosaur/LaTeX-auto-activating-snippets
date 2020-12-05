@@ -88,6 +88,8 @@ enough, but in any case you can also view this file from emacs:
 | ~sin~    | \sin                |
 | ~star~   | \star               |
 | ~gcd~    | \gcd                |
+| ~min~    | \min                |
+| ~max~    | \max                |
 | ~CC~     | \CC                 |
 | ~FF~     | \FF                 |
 | ~HH~     | \HH                 |
