@@ -1,21 +1,24 @@
-;;; latex-auto-activating-snippets.el --- TODO -*- lexical-binding: t; -*-
+;;; latex-auto-activating-snippets.el --- A bundle of as-you-type LaTeX snippets -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2020 Yoav Marco
 ;;
 ;; Author: Yoav Marco <http://github/yoavm448>
+;;         TEC <http://github/tecosaur>
 ;; Maintainer: Yoav Marco <yoavm448@gmail.com>
 ;; Created: September 22, 2020
 ;; Modified: September 22, 2020
 ;; Version: 0.0.1
-;; Keywords:
+;; Keywords: tools, tex
 ;; Homepage: https://github.com/tecosaur/auto-latex-auto-activating-snippets
-;; Package-Requires: ((emacs 28.0.50) (cl-lib "0.5") (yasnippet 0.14))
+;; Package-Requires: ((emacs "26.3") (auto-activating-snippets "0.0.1") (yasnippet "0.14"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; Commentary:
 ;;
-;;  TODO
+;; Make use of the auto-activating-snippets engine to provide an expansive
+;; collection of LaTeX snippets. Primaraly covering: operators, symbols,
+;; accents, subscripts, and a few fraction forms.
 ;;
 ;;; Code:
 
@@ -24,6 +27,7 @@
 (require 'yasnippet)
 
 (defun laas-current-snippet-insert-post-space-if-wanted ()
+  "Insert a space at point, if it seems warranted."
   (when (and (stringp aas-transient-snippet-expansion)
              (= ?\\ (aref aas-transient-snippet-expansion 0))
              (not (memq (char-after) '(?\) ?\]))))
@@ -75,7 +79,7 @@ insert a new subscript (e.g a -> a_1)."
          'one-sub)))
 
 (defun laas-identify-adjacent-tex-object (&optional point)
-  "Return the startig position of the left-adjacent TeX object from POINT."
+  "Return the starting position of the left-adjacent TeX object from POINT."
   (save-excursion
     (goto-char (or point (point)))
     (cond
@@ -339,18 +343,18 @@ insert a new subscript (e.g a -> a_1)."
   `(:cond ,#'aas-object-on-left-condition
     .
     ,(cl-loop for (key . exp) in '((". " . "dot")
-                                  (".. " . "dot")
-                                  (",." . "vec")
-                                  (".," . "vec")
-                                  ("~ " . "tilde")
-                                  ("hat" . "hat")
-                                  ("bar" . "overline"))
-             collect :expansion-desc
-             collect (format "Wrap in \\%s{}" exp)
-             collect key
-             ;; re-bind exp so its not changed in the next iteration
-             collect (let ((expp exp)) (lambda () (interactive)
-                                         (laas-wrap-previous-object expp)))))
+                                   (".. " . "dot")
+                                   (",." . "vec")
+                                   (".," . "vec")
+                                   ("~ " . "tilde")
+                                   ("hat" . "hat")
+                                   ("bar" . "overline"))
+              collect :expansion-desc
+              collect (format "Wrap in \\%s{}" exp)
+              collect key
+              ;; re-bind exp so its not changed in the next iteration
+              collect (let ((expp exp)) (lambda () (interactive)
+                                          (laas-wrap-previous-object expp)))))
   "A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.")
 
 (defun laas--no-backslash-before-point? ()
@@ -358,7 +362,8 @@ insert a new subscript (e.g a -> a_1)."
   (/= (char-before) ?\\))
 
 (add-hook 'LaTeX-mode-hook
-          (lambda ()
+          (defun laas-check-no-backslash ()
+            "Ensure that \\cmd does not expand to \\\\cmd when typed."
             (add-hook 'aas-global-condition-hook
                       #'laas--no-backslash-before-point?
                       nil 'local)))
