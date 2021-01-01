@@ -29,6 +29,13 @@
              (not (memq (char-after) '(?\) ?\]))))
     (insert " ")))
 
+(add-hook 'LaTeX-mode-hook
+          (defun laas-add-space-after-expand-h ()
+            "Hook intelligent space insertion onto snippet expansion."
+            (add-hook 'aas-post-snippet-expand-hook
+                      #'laas-current-snippet-insert-post-space-if-wanted
+                      nil t)))
+
 (defun laas-insert-script (s)
   "Add a subscript with a text of S (string).
 
