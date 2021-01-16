@@ -116,7 +116,7 @@ insert a new subscript (e.g a -> a_1)."
       (goto-char start)
       (insert (concat "\\" tex-command "{")))))
 
-(defun aas-object-on-left-condition ()
+(defun laas-object-on-left-condition ()
   "Return t if there is a TeX object imidiately to the left."
   ;; TODO use `laas-identify-adjacent-tex-object'
   (and (or (<= ?a (char-before) ?z)
@@ -337,14 +337,14 @@ insert a new subscript (e.g a -> a_1)."
 
 (defvar laas-frac-snippet
   (list
-   :cond #'aas-object-on-left-condition
+   :cond #'laas-object-on-left-condition
    :expansion-desc "Wrap object on the left with \\frac{}{}, leave `point' in the denuminator."
    "/" #'laas-smart-fraction)
   "Frac snippet. Expand in maths when there's something to frac on on the left.")
 
 
 (defvar laas-accent-snippets
-  `(:cond ,#'aas-object-on-left-condition
+  `(:cond ,#'laas-object-on-left-condition
     .
     ,(cl-loop for (key . exp) in '((". " . "dot")
                                    (".. " . "dot")
