@@ -1,9 +1,8 @@
 ;;; latex-auto-activating-snippets.el --- A bundle of as-you-type LaTeX snippets -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2020 Yoav Marco
+;; Copyright (C) 2020 Yoav Marco, TEC
 ;;
-;; Author: Yoav Marco <http://github/yoavm448>
-;;         TEC <http://github/tecosaur>
+;; Authors: Yoav Marco <https://github/yoavm448> TEC <https://github/tecosaur>
 ;; Maintainer: Yoav Marco <yoavm448@gmail.com>
 ;; Created: September 22, 2020
 ;; Modified: September 22, 2020
