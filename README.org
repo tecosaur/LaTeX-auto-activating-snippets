@@ -1,5 +1,5 @@
 # -*- mode: org -*-
-#+TITLE: LaTeX Snippets
+#+TITLE: LaTeX Auto Activating Snippets
 
 A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activating-snippets][auto-activating-snippets engine]].
 
@@ -29,7 +29,7 @@ A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activati
 /Note:/ The rendering on GitHub is a little wonkey. It should be understandable
 enough, but in any case you can also view this file from emacs:
 #+BEGIN_SRC sh
-
+...TODO
 #+END_SRC
 ** Basic set
 #+BEGIN_SRC emacs-lisp :exports results
