@@ -1,4 +1,4 @@
-;;; latex-auto-activating-snippets.el --- A bundle of as-you-type LaTeX snippets -*- lexical-binding: t; -*-
+;;; laas.el --- A bundle of as-you-type LaTeX snippets -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2020-2021 Yoav Marco, TEC
 ;;
@@ -377,5 +377,5 @@ insert a new subscript (e.g a -> a_1)."
 (apply #'aas-set-snippets 'latex-mode laas-frac-snippet)
 (apply #'aas-set-snippets 'latex-mode laas-accent-snippets)
 
-(provide 'latex-auto-activating-snippets)
-;;; latex-auto-activating-snippets.el ends here
+(provide 'laas)
+;;; laas.el ends here
