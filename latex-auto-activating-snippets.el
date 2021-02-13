@@ -1,15 +1,15 @@
 ;;; latex-auto-activating-snippets.el --- A bundle of as-you-type LaTeX snippets -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2020 Yoav Marco, TEC
+;; Copyright (C) 2020-2021 Yoav Marco, TEC
 ;;
-;; Authors: Yoav Marco <https://github/yoavm448> TEC <https://github/tecosaur>
+;; Authors: Yoav Marco <https://github.com/yoavm448> TEC <https://github.com/tecosaur>
 ;; Maintainer: Yoav Marco <yoavm448@gmail.com>
 ;; Created: September 22, 2020
-;; Modified: September 22, 2020
-;; Version: 0.0.1
+;; Modified: February 23, 2021
+;; Version: 0.1
 ;; Keywords: tools, tex
 ;; Homepage: https://github.com/tecosaur/auto-latex-auto-activating-snippets
-;; Package-Requires: ((emacs "26.3") (auto-activating-snippets "0.0.1") (yasnippet "0.14"))
+;; Package-Requires: ((emacs "26.3") (auto-activating-snippets "0.1") (yasnippet "0.14"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 ;;
 ;; This file is not part of GNU Emacs.
