@@ -9,7 +9,7 @@
 ;; Version: 0.2
 ;; Keywords: tools, tex
 ;; Homepage: https://github.com/tecosaur/auto-latex-auto-activating-snippets
-;; Package-Requires: ((emacs "26.3") (aas "0.2") (yasnippet "0.14"))
+;; Package-Requires: ((emacs "26.3") (auctex "11.88") (aas "0.2") (yasnippet "0.14"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 ;;
 ;; This file is not part of GNU Emacs.
