@@ -125,20 +125,24 @@ insert a new subscript (e.g a -> a_1)."
            (memq (char-before) '(?\) ?\] ?})))
        (texmathp)))
 
-;; HACK smartparens runs after us on the global `post-self-insert-hook' and
-;;      thinks that because a { was inserted after a self-insert event that it
-;;      should insert the matching } even though we took care of that.
-;; TODO check it without `smartparens-global-mode' as well
+;; HACK Smartparens runs after us on the global `post-self-insert-hook' and
+;;      thinks that since a { was inserted after a self-insert event, it
+;;      should insert the matching } - even though we took care of that.
+;;      laas--shut-up-smartparens removes
+(defun laas--restore-smartparens-hook ()
+  (remove-hook 'post-self-insert-hook #'laas--restore-smartparens-hook)
+  (add-hook 'post-self-insert-hook #'sp--post-self-insert-hook-handler))
+
 (defun laas--shut-up-smartparens ()
-  "Make sure `smartparens' doesn't mess up after snippet expanding to parentheses."
-  (when (bound-and-true-p smartparens-mode)
-    (let ((gpsih (default-value 'post-self-insert-hook)))
-      (setq-default post-self-insert-hook nil)
-      ;; push rather than add-hook so it doesn't run right after this very own
-      ;; hook, but next time
-      (push (lambda ()
-              (setq-default post-self-insert-hook gpsih))
-            post-self-insert-hook))))
+  "Remove Smartparens' hook temporarily from `post-self-insert-hook'."
+  (when (memq #'sp--post-self-insert-hook-handler
+              (default-value 'post-self-insert-hook))
+    (remove-hook 'post-self-insert-hook #'sp--post-self-insert-hook-handler)
+    ;; push rather than add-hook so it doesn't run right after this very own
+    ;; hook, but next time
+    (unless (memq #'laas--restore-smartparens-hook
+                  (default-value 'post-self-insert-hook))
+      (push #'laas--restore-smartparens-hook (default-value 'post-self-insert-hook)))))
 
 (defun laas-smart-fraction ()
   "Expansion function used for auto-subscript snippets."
