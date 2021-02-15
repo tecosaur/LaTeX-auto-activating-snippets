@@ -6,9 +6,9 @@ A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activati
 * Sample Configuration
 #+BEGIN_SRC emacs-lisp
 (use-package! laas
-  :after latex ; auctex's LaTeX package
+  :hook (LaTeX-mode . laas-mode)
   :config ; do whatever here
-  (aas-set-snippets 'latex-mode
+  (aas-set-snippets 'laas-mode
                     ;; set condition!
                     :cond #'texmathp ; expand only while in math
                     "supp" "\\supp"

@@ -369,17 +369,26 @@ insert a new subscript (e.g a -> a_1)."
   "Check that the char before `point' is not a backslash."
   (/= (char-before) ?\\))
 
-(add-hook 'LaTeX-mode-hook
-          (defun laas-check-no-backslash ()
-            "Ensure that \\cmd does not expand to \\\\cmd when typed."
-            (add-hook 'aas-global-condition-hook
-                      #'laas--no-backslash-before-point?
-                      nil 'local)))
 
-(apply #'aas-set-snippets 'latex-mode laas-basic-snippets)
-(apply #'aas-set-snippets 'latex-mode laas-subscript-snippets)
-(apply #'aas-set-snippets 'latex-mode laas-frac-snippet)
-(apply #'aas-set-snippets 'latex-mode laas-accent-snippets)
+(apply #'aas-set-snippets 'laas-mode laas-basic-snippets)
+(apply #'aas-set-snippets 'laas-mode laas-subscript-snippets)
+(apply #'aas-set-snippets 'laas-mode laas-frac-snippet)
+(apply #'aas-set-snippets 'laas-mode laas-accent-snippets)
+
+;;;###autoload
+(define-minor-mode laas-mode
+  "Minor mode for enabling a ton of auto-activating LaTeX snippets."
+  :init-value nil
+  (if laas-mode
+      (progn
+        (aas-mode +1)
+        (aas-activate-keymap 'laas-mode)
+        (add-hook 'aas-global-condition-hook
+                  #'laas--no-backslash-before-point?
+                  nil 'local))
+    (aas-deactivate-keymap 'laas-mode)
+    (remove-hook 'aas-global-condition-hook #'laas--no-backslash-before-point?
+                 'local)))
 
 (provide 'laas)
 ;;; laas.el ends here
