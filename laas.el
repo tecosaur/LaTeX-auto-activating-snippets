@@ -59,6 +59,24 @@ insert a new subscript (e.g a -> a_1)."
      (forward-char)
      (insert s "}"))))
 
+(defun laas-mathp ()
+  "Determine whether point is within a LaTeX maths block."
+  (pcase major-mode
+    ('latex-mode (texmathp))
+    ('org-mode (laas-org-mathp))
+    (_ (message "LaTeX auto-activated snippets does not currently support %s" major-mode)
+       nil)))
+
+(declare-function org-element-at-point "org-element")
+(declare-function org-element-type "org-element")
+(declare-function org-element-context "org-element")
+
+(defun laas-org-mathp ()
+  "Determine whether the point is within a LaTeX fragment or environment."
+  (let ((element (org-element-at-point)))
+    (or (eq (org-element-type element) 'latex-environment)
+        (eq (org-element-type (org-element-context element)) 'latex-fragment))))
+
 (defun laas-auto-script-condition ()
   "Condition used for auto-sub/superscript snippets."
   (cond ((or (bobp) (= (1- (point)) (point-min)))
@@ -75,7 +93,7 @@ insert a new subscript (e.g a -> a_1)."
           (not (or (<= ?a (char-before (1- (point))) ?z)
                    (<= ?A (char-before (1- (point))) ?Z)))
           ;; Inside math
-          (texmathp))
+          (laas-mathp))
          'one-sub)))
 
 (defun laas-identify-adjacent-tex-object (&optional point)
@@ -123,7 +141,7 @@ insert a new subscript (e.g a -> a_1)."
            (<= ?A (char-before) ?Z)
            (<= ?0 (char-before) ?9)
            (memq (char-before) '(?\) ?\] ?})))
-       (texmathp)))
+       (laas-mathp)))
 
 ;; HACK Smartparens runs after us on the global `post-self-insert-hook' and
 ;;      thinks that since a { was inserted after a self-insert event, it
@@ -165,7 +183,7 @@ insert a new subscript (e.g a -> a_1)."
 
 (defvar laas-basic-snippets
   (list
-   :cond #'texmathp
+   :cond #'laas-mathp
    "!="    "\\neq"
    "!>"    "\\mapsto"
    "**"    "\\cdot"
