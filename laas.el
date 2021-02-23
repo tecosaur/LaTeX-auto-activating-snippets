@@ -148,9 +148,14 @@ insert a new subscript (e.g a -> a_1)."
 ;;      should insert the matching } - even though we took care of that.
 ;;      laas--shut-up-smartparens removes
 (defun laas--restore-smartparens-hook ()
+  "Restore `sp--post-self-insert-hook-handler' to `post-self-insert-hook'.
+
+Remove ourselves, `laas--restore-smartparens-hook', as well, so
+it is restored only once."
   (remove-hook 'post-self-insert-hook #'laas--restore-smartparens-hook)
   (add-hook 'post-self-insert-hook #'sp--post-self-insert-hook-handler))
 
+(declare-function sp--post-self-insert-hook-handler "smartparens")
 (defun laas--shut-up-smartparens ()
   "Remove Smartparens' hook temporarily from `post-self-insert-hook'."
   (when (memq #'sp--post-self-insert-hook-handler
