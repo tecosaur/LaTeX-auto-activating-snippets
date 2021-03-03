@@ -185,205 +185,201 @@ it is restored only once."
   (laas--shut-up-smartparens))
 
 (defvar laas-basic-snippets
-  (list
-   :cond #'laas-mathp
-   "!="    "\\neq"
-   "!>"    "\\mapsto"
-   "**"    "\\cdot"
-   "+-"    "\\pm"
-   "-+"    "\\mp"
-   "->"    "\\to"
-   "..."   "\\dots"
-   "<<"    "\\ll"
-   "<="    "\\leq"
-   "<>"    "\\diamond"
-   "=<"    "\\impliedby"
-   "=="    "&="
-   "=>"    "\\implies"
-   ">="    "\\geq"
-   ">>"    "\\gg"
-   "AA"    "\\forall"
-   "EE"    "\\exists"
-   "cb"    "^3"
-   "iff"   "\\iff"
-   "inn"   "\\in"
-   "notin" "\\not\\in"
-   "sr"    "^2"
-   "xx"    "\\times"
-   "|->"   "\\mapsto"
-   "||"    "\\mid"
-   "~="    "\\approx"
-   "~~"    "\\sim"
-   ;; "...\\)a" 	"...\\) a"
-   ;; "//" 	"\\frac{}{}"
-   ;; "a" "+b 	a + b"
-   ;; "a" "^ 	a^"
-   ;; "a+" 	"a +"
-   ;; "a^11" 	"a^{11}"
-   ;; "case" 	"cases env."
-   ;; "part" 	"\\frac{\\partial }{\\partial }"
-   ;; "pmat" 	"pmatrix"
-   ;; "set" 	"\\{ \\}"
-   ;; "sq" 	"\\sqrt{}"
-   ;; "st" 	"\\text{s.t.}"
-   ;;"\\\\\\"\\" 	"\\setminus"
+  '(:cond laas-mathp
+    "!="    "\\neq"
+    "!>"    "\\mapsto"
+    "**"    "\\cdot"
+    "+-"    "\\pm"
+    "-+"    "\\mp"
+    "->"    "\\to"
+    "..."   "\\dots"
+    "<<"    "\\ll"
+    "<="    "\\leq"
+    "<>"    "\\diamond"
+    "=<"    "\\impliedby"
+    "=="    "&="
+    "=>"    "\\implies"
+    ">="    "\\geq"
+    ">>"    "\\gg"
+    "AA"    "\\forall"
+    "EE"    "\\exists"
+    "cb"    "^3"
+    "iff"   "\\iff"
+    "inn"   "\\in"
+    "notin" "\\not\\in"
+    "sr"    "^2"
+    "xx"    "\\times"
+    "|->"   "\\mapsto"
+    "||"    "\\mid"
+    "~="    "\\approx"
+    "~~"    "\\sim"
+    ;; "...\\)a" 	"...\\) a"
+    ;; "//" 	"\\frac{}{}"
+    ;; "a" "+b 	a + b"
+    ;; "a" "^ 	a^"
+    ;; "a+" 	"a +"
+    ;; "a^11" 	"a^{11}"
+    ;; "case" 	"cases env."
+    ;; "part" 	"\\frac{\\partial }{\\partial }"
+    ;; "pmat" 	"pmatrix"
+    ;; "set" 	"\\{ \\}"
+    ;; "sq" 	"\\sqrt{}"
+    ;; "st" 	"\\text{s.t.}"
+    ;;"\\\\\\"\\" 	"\\setminus"
 
-   "arccos" "\\arccos"
-   "arccot" "\\arccot"
-   "arccot" "\\arccot"
-   "arccsc" "\\arccsc"
-   "arcsec" "\\arcsec"
-   "arcsin" "\\arcsin"
-   "arctan" "\\arctan"
-   "cos"    "\\cos"
-   "cot"    "\\cot"
-   "csc"    "\\csc"
-   "exp"    "\\exp"
-   "ln"     "\\ln"
-   "log"    "\\log"
-   "perp"   "\\perp"
-   "sin"    "\\sin"
-   "star"   "\\star"
-   "gcd"    "\\gcd"
-   "min"    "\\min"
-   "max"    "\\max"
+    "arccos" "\\arccos"
+    "arccot" "\\arccot"
+    "arccot" "\\arccot"
+    "arccsc" "\\arccsc"
+    "arcsec" "\\arcsec"
+    "arcsin" "\\arcsin"
+    "arctan" "\\arctan"
+    "cos"    "\\cos"
+    "cot"    "\\cot"
+    "csc"    "\\csc"
+    "exp"    "\\exp"
+    "ln"     "\\ln"
+    "log"    "\\log"
+    "perp"   "\\perp"
+    "sin"    "\\sin"
+    "star"   "\\star"
+    "gcd"    "\\gcd"
+    "min"    "\\min"
+    "max"    "\\max"
 
-   "CC" "\\CC"
-   "FF" "\\FF"
-   "HH" "\\HH"
-   "NN" "\\NN"
-   "PP" "\\PP"
-   "QQ" "\\QQ"
-   "RR" "\\RR"
-   "ZZ" "\\ZZ"
+    "CC" "\\CC"
+    "FF" "\\FF"
+    "HH" "\\HH"
+    "NN" "\\NN"
+    "PP" "\\PP"
+    "QQ" "\\QQ"
+    "RR" "\\RR"
+    "ZZ" "\\ZZ"
 
-   ";a"  "\\alpha"
-   ";A"  "\\forall"        ";;A" "\\aleph"
-   ";b"  "\\beta"
-   ";;;c" "\\cos"
-   ";;;C" "\\arccos"
-   ";d"  "\\delta"         ";;d" "\\partial"
-   ";D"  "\\Delta"         ";;D" "\\nabla"
-   ";e"  "\\epsilon"       ";;e" "\\varepsilon"   ";;;e" "\\exp"
-   ";E"  "\\exists"                               ";;;E" "\\ln"
-   ";f"  "\\phi"           ";;f" "\\varphi"
-   ";F"  "\\Phi"
-   ";g"  "\\gamma"                                ";;;g" "\\lg"
-   ";G"  "\\Gamma"                                ";;;G" "10^{?}"
-   ";h"  "\\eta"           ";;h" "\\hbar"
-   ";i"  "\\in"            ";;i" "\\imath"
-   ";I"  "\\iota"          ";;I" "\\Im"
-   ";;j" "\\jmath"
-   ";k"  "\\kappa"
-   ";l"  "\\lambda"        ";;l" "\\ell"          ";;;l" "\\log"
-   ";L"  "\\Lambda"
-   ";m"  "\\mu"
-   ";n"  "\\nu"                                   ";;;n" "\\ln"
-   ";N"  "\\nabla"                                ";;;N" "\\exp"
-   ";o"  "\\omega"
-   ";O"  "\\Omega"         ";;O" "\\mho"
-   ";p"  "\\pi"            ";;p" "\\varpi"
-   ";P"  "\\Pi"
-   ";q"  "\\theta"         ";;q" "\\vartheta"
-   ";Q"  "\\Theta"
-   ";r"  "\\rho"           ";;r" "\\varrho"
-   ";;R" "\\Re"
-   ";s"  "\\sigma"         ";;s" "\\varsigma"    ";;;s" "\\sin"
-   ";S"  "\\Sigma"                               ";;;S" "\\arcsin"
-   ";t"  "\\tau"                                 ";;;t" "\\tan"
-   ";;;T" "\\arctan"
-   ";u"  "\\upsilon"
-   ";U"  "\\Upsilon"
-   ";v"  "\\vee"
-   ";V"  "\\Phi"
-   ";w"  "\\xi"
-   ";W"  "\\Xi"
-   ";x"  "\\chi"
-   ";y"  "\\psi"
-   ";Y"  "\\Psi"
-   ";z"  "\\zeta"
-   ";0"  "\\emptyset"
-   ";8"  "\\infty"
-   ";!"  "\\neg"
-   ";^"  "\\uparrow"
-   ";&"  "\\wedge"
-   ";~"  "\\approx"        ";;~" "\\simeq"
-   ";_"  "\\downarrow"
-   ";+"  "\\cup"
-   ";-"  "\\leftrightarrow"";;-" "\\longleftrightarrow"
-   ";*"  "\\times"
-   ";/"  "\\not"
-   ";|"  "\\mapsto"        ";;|" "\\longmapsto"
-   ";\\" "\\setminus"
-   ";="  "\\Leftrightarrow"";;=" "\\Longleftrightarrow"
-   ";(" "\\langle"
-   ";)" "\\rangle"
-   ";[" "\\Leftarrow"     ";;[" "\\Longleftarrow"
-   ";]" "\\Rightarrow"    ";;]" "\\Longrightarrow"
-   ";{"  "\\subset"
-   ";}"  "\\supset"
-   ";<"  "\\leftarrow"    ";;<" "\\longleftarrow"  ";;;<" "\\min"
-   ";>"  "\\rightarrow"   ";;>" "\\longrightarrow" ";;;>" "\\max"
-   ";'"  "\\prime"
-   ";."  "\\cdot")
+    ";a"  "\\alpha"
+    ";A"  "\\forall"        ";;A" "\\aleph"
+    ";b"  "\\beta"
+    ";;;c" "\\cos"
+    ";;;C" "\\arccos"
+    ";d"  "\\delta"         ";;d" "\\partial"
+    ";D"  "\\Delta"         ";;D" "\\nabla"
+    ";e"  "\\epsilon"       ";;e" "\\varepsilon"   ";;;e" "\\exp"
+    ";E"  "\\exists"                               ";;;E" "\\ln"
+    ";f"  "\\phi"           ";;f" "\\varphi"
+    ";F"  "\\Phi"
+    ";g"  "\\gamma"                                ";;;g" "\\lg"
+    ";G"  "\\Gamma"                                ";;;G" "10^{?}"
+    ";h"  "\\eta"           ";;h" "\\hbar"
+    ";i"  "\\in"            ";;i" "\\imath"
+    ";I"  "\\iota"          ";;I" "\\Im"
+    ";;j" "\\jmath"
+    ";k"  "\\kappa"
+    ";l"  "\\lambda"        ";;l" "\\ell"          ";;;l" "\\log"
+    ";L"  "\\Lambda"
+    ";m"  "\\mu"
+    ";n"  "\\nu"                                   ";;;n" "\\ln"
+    ";N"  "\\nabla"                                ";;;N" "\\exp"
+    ";o"  "\\omega"
+    ";O"  "\\Omega"         ";;O" "\\mho"
+    ";p"  "\\pi"            ";;p" "\\varpi"
+    ";P"  "\\Pi"
+    ";q"  "\\theta"         ";;q" "\\vartheta"
+    ";Q"  "\\Theta"
+    ";r"  "\\rho"           ";;r" "\\varrho"
+    ";;R" "\\Re"
+    ";s"  "\\sigma"         ";;s" "\\varsigma"    ";;;s" "\\sin"
+    ";S"  "\\Sigma"                               ";;;S" "\\arcsin"
+    ";t"  "\\tau"                                 ";;;t" "\\tan"
+    ";;;T" "\\arctan"
+    ";u"  "\\upsilon"
+    ";U"  "\\Upsilon"
+    ";v"  "\\vee"
+    ";V"  "\\Phi"
+    ";w"  "\\xi"
+    ";W"  "\\Xi"
+    ";x"  "\\chi"
+    ";y"  "\\psi"
+    ";Y"  "\\Psi"
+    ";z"  "\\zeta"
+    ";0"  "\\emptyset"
+    ";8"  "\\infty"
+    ";!"  "\\neg"
+    ";^"  "\\uparrow"
+    ";&"  "\\wedge"
+    ";~"  "\\approx"        ";;~" "\\simeq"
+    ";_"  "\\downarrow"
+    ";+"  "\\cup"
+    ";-"  "\\leftrightarrow"";;-" "\\longleftrightarrow"
+    ";*"  "\\times"
+    ";/"  "\\not"
+    ";|"  "\\mapsto"        ";;|" "\\longmapsto"
+    ";\\" "\\setminus"
+    ";="  "\\Leftrightarrow"";;=" "\\Longleftrightarrow"
+    ";(" "\\langle"
+    ";)" "\\rangle"
+    ";[" "\\Leftarrow"     ";;[" "\\Longleftarrow"
+    ";]" "\\Rightarrow"    ";;]" "\\Longrightarrow"
+    ";{"  "\\subset"
+    ";}"  "\\supset"
+    ";<"  "\\leftarrow"    ";;<" "\\longleftarrow"  ";;;<" "\\min"
+    ";>"  "\\rightarrow"   ";;>" "\\longrightarrow" ";;;>" "\\max"
+    ";'"  "\\prime"
+    ";."  "\\cdot")
   "Basic snippets. Expand only inside maths.")
 
 (defvar laas-subscript-snippets
-  (nconc (list
-          :cond #'laas-auto-script-condition)
-         (cl-loop for (key . exp) in '(("ii"  . laas-insert-script)
-                                       ("ip1" . "_{i+1}")
-                                       ("im1" . "_{i-1}")
-                                       ("jj"  . laas-insert-script)
-                                       ("jp1" . "_{j+1}")
-                                       ("jm1" . "_{j-1}")
-                                       ("nn"  . laas-insert-script)
-                                       ("np1" . "_{n+1}")
-                                       ("nm1" . "_{n-1}")
-                                       ("kk"  . laas-insert-script)
-                                       ("kp1" . "_{k+1}")
-                                       ("km1" . "_{k-1}")
-                                       ("0"   . laas-insert-script)
-                                       ("1"   . laas-insert-script)
-                                       ("2"   . laas-insert-script)
-                                       ("3"   . laas-insert-script)
-                                       ("4"   . laas-insert-script)
-                                       ("5"   . laas-insert-script)
-                                       ("6"   . laas-insert-script)
-                                       ("7"   . laas-insert-script)
-                                       ("8"   . laas-insert-script)
-                                       ("9"   . laas-insert-script))
-                  if (symbolp exp)
-                  collect :expansion-desc
-                  and collect (format "X_%s, or X_{Y%s} if a subscript was typed already"
-                                      (substring key -1) (substring key -1))
-                  collect key collect exp))
+  `(:cond laas-auto-script-condition
+    ,@(cl-loop for (key exp) in '(("ii"  laas-insert-script)
+                                  ("ip1" "_{i+1}")
+                                  ("im1" "_{i-1}")
+                                  ("jj"  laas-insert-script)
+                                  ("jp1" "_{j+1}")
+                                  ("jm1" "_{j-1}")
+                                  ("nn"  laas-insert-script)
+                                  ("np1" "_{n+1}")
+                                  ("nm1" "_{n-1}")
+                                  ("kk"  laas-insert-script)
+                                  ("kp1" "_{k+1}")
+                                  ("km1" "_{k-1}")
+                                  ("0"   laas-insert-script)
+                                  ("1"   laas-insert-script)
+                                  ("2"   laas-insert-script)
+                                  ("3"   laas-insert-script)
+                                  ("4"   laas-insert-script)
+                                  ("5"   laas-insert-script)
+                                  ("6"   laas-insert-script)
+                                  ("7"   laas-insert-script)
+                                  ("8"   laas-insert-script)
+                                  ("9"   laas-insert-script))
+               if (symbolp exp)
+               collect :expansion-desc
+               and collect (format "X_%s, or X_{Y%s} if a subscript was typed already"
+                               (substring key -1) (substring key -1))
+               collect key collect exp))
   "Automatic subscripts! Expand In math and after a single letter.")
 
 (defvar laas-frac-snippet
-  (list
-   :cond #'laas-object-on-left-condition
-   :expansion-desc "Wrap object on the left with \\frac{}{}, leave `point' in the denuminator."
-   "/" #'laas-smart-fraction)
+  '(:cond laas-object-on-left-condition
+    :expansion-desc "Wrap object on the left with \\frac{}{}, leave `point' in the denuminator."
+    "/" laas-smart-fraction)
   "Frac snippet. Expand in maths when there's something to frac on on the left.")
 
 
 (defvar laas-accent-snippets
-  `(:cond ,#'laas-object-on-left-condition
-    .
-    ,(cl-loop for (key . exp) in '((". " . "dot")
-                                   (".. " . "dot")
-                                   (",." . "vec")
-                                   (".," . "vec")
-                                   ("~ " . "tilde")
-                                   ("hat" . "hat")
-                                   ("bar" . "overline"))
-              collect :expansion-desc
-              collect (format "Wrap in \\%s{}" exp)
-              collect key
-              ;; re-bind exp so its not changed in the next iteration
-              collect (let ((expp exp)) (lambda () (interactive)
-                                          (laas-wrap-previous-object expp)))))
+  `(:cond laas-object-on-left-condition
+    ,@(cl-loop for (key exp) in '((". " "dot")
+                                  (".. " "dot")
+                                  (",." "vec")
+                                  (".," "vec")
+                                  ("~ " "tilde")
+                                  ("hat" "hat")
+                                  ("bar" "overline"))
+               collect :expansion-desc
+               collect (format "Wrap in \\%s{}" exp)
+               collect key
+               ;; re-bind exp so its not changed in the next iteration
+               collect (let ((expp exp)) (lambda () (interactive)
+                                           (laas-wrap-previous-object expp)))))
   "A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.")
 
 (defun laas--no-backslash-before-point? ()
