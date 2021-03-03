@@ -26,19 +26,17 @@
 (require 'texmathp)
 (require 'yasnippet)
 
+(defgroup laas nil
+  "Snippet expansions mid-typing."
+  :prefix "laas-"
+  :group 'aas)
+
 (defun laas-current-snippet-insert-post-space-if-wanted ()
   "Insert a space at point, if it seems warranted."
   (when (and (stringp aas-transient-snippet-expansion)
              (= ?\\ (aref aas-transient-snippet-expansion 0))
              (not (memq (char-after) '(?\) ?\]))))
     (insert " ")))
-
-(add-hook 'LaTeX-mode-hook
-          (defun laas-add-space-after-expand-h ()
-            "Hook intelligent space insertion onto snippet expansion."
-            (add-hook 'aas-post-snippet-expand-hook
-                      #'laas-current-snippet-insert-post-space-if-wanted
-                      nil t)))
 
 (defun laas-insert-script (s)
   "Add a subscript with a text of S (string).
@@ -398,6 +396,11 @@ it is restored only once."
 (apply #'aas-set-snippets 'laas-mode laas-frac-snippet)
 (apply #'aas-set-snippets 'laas-mode laas-accent-snippets)
 
+(defcustom laas-enable-auto-space t
+  "If non-nil, hook intelligent space insertion onto snippet expansion."
+  :type 'boolean
+  :group 'laas)
+
 ;;;###autoload
 (define-minor-mode laas-mode
   "Minor mode for enabling a ton of auto-activating LaTeX snippets."
@@ -408,9 +411,16 @@ it is restored only once."
         (aas-activate-keymap 'laas-mode)
         (add-hook 'aas-global-condition-hook
                   #'laas--no-backslash-before-point?
-                  nil 'local))
+                  nil 'local)
+        (when laas-enable-auto-space
+          (add-hook 'aas-post-snippet-expand-hook
+                    #'laas-current-snippet-insert-post-space-if-wanted
+                    nil 'local)))
     (aas-deactivate-keymap 'laas-mode)
     (remove-hook 'aas-global-condition-hook #'laas--no-backslash-before-point?
+                 'local)
+    (remove-hook 'aas-post-snippet-expand-hook
+                 #'laas-current-snippet-insert-post-space-if-wanted
                  'local)))
 
 (provide 'laas)
