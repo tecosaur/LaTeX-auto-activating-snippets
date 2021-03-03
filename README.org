@@ -5,7 +5,7 @@ A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activati
 
 * Sample Configuration
 #+BEGIN_SRC emacs-lisp
-(use-package! laas
+(use-package laas
   :hook (LaTeX-mode . laas-mode)
   :config ; do whatever here
   (aas-set-snippets 'laas-mode
