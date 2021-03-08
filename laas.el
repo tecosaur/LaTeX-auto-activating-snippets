@@ -103,20 +103,21 @@ insert a new subscript (e.g a -> a_1)."
       (backward-sexp)
       (point))
      ((= (char-before) ?})
-      (save-excursion
-        (cl-loop do (backward-sexp)
-                 while (= (char-before) ?}))
-        ;; try to catch the marco if the braces belong to one
-        (if (looking-back "\\\\[A-Za-z@*]+" (line-beginning-position))
-            (match-beginning 0)
-          (point))))
+      (cl-loop do (backward-sexp)
+               while (= (char-before) ?}))
+      ;; try to catch the marco if the braces belong to one
+      (when (looking-back "\\\\[A-Za-z@*]+" (line-beginning-position))
+        (goto-char (match-beginning 0)))
+      (when (memq (char-before) '(?_ ?^ ?.))
+        (backward-char)
+        (goto-char (laas-identify-adjacent-tex-object))) ; yay recursion
+      (point))
      ((or (<= ?a (char-before) ?z)
           (<= ?A (char-before) ?Z)
           (<= ?0 (char-before) ?9))
       (backward-word)
       (when (= (char-before) ?\\) (backward-char))
-      (when (or (= (char-before) ?_)
-                (= (char-before) ?^))
+      (when (memq (char-before) '(?_ ?^ ?.))
         (backward-char)
         (goto-char (laas-identify-adjacent-tex-object))) ; yay recursion
       (point)))))
