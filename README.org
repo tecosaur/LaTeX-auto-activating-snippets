@@ -1,10 +1,13 @@
-# -*- mode: org -*-
-#+TITLE: LaTeX Auto Activating Snippets
+#+title: LaTeX Auto Activating Snippets
+#+author: tecosaur, ymarco
+
+#+html: <a href="https://www.gnu.org/software/emacs/emacs.html#Releases"><img src="https://img.shields.io/badge/Emacs-26.3+-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white"></a>
+#+html: <a href="https://melpa.org/#/laas"><img src="https://melpa.org/packages/laas-badge.svg"></a>
 
 A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activating-snippets][auto-activating-snippets engine]].
 
 * Sample Configuration
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package laas
   :hook (LaTeX-mode . laas-mode)
   :config ; do whatever here
@@ -21,56 +24,56 @@ A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activati
                              (yas-expand-snippet "\\frac{$1}{$2}$0"))
                     "Span" (lambda () (interactive)
                              (yas-expand-snippet "\\Span($1)$0"))))
-#+END_SRC
+#+end_src
 
 * Credits
 [[https://github.com/cdominik/cdlatex][cdlatex]] and this [[https://castel.dev/post/lecture-notes-1/][very nice blog post]].
 * Snippets
 /Note:/ The rendering on GitHub is a little wonkey. It should be understandable
 enough, but in any case you can also view this file from emacs:
-#+BEGIN_SRC sh
+#+begin_src sh
 ...TODO
-#+END_SRC
+#+end_src
 ** Basic set
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-basic-snippets)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 : Basic snippets. Expand only inside maths.
 
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-snippet-array laas-basic-snippets)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
-| ~!=~     | \neq                |
+| ~!=~     | \neq                   |
 | ~!>~     | \mapsto             |
-| ~**~     | \cdot               |
-| ~+-~     | \pm                 |
+| ~**~     | \cdot                   |
+| ~+-~     | \pm                   |
 | ~-+~     | \mp                 |
-| ~->~     | \to                 |
-| ~...~    | \dots               |
-| ~<<~     | \ll                 |
-| ~<=~     | \leq                |
-| ~<>~     | \diamond            |
+| ~->~     | \to                   |
+| ~...~    | \dots                   |
+| ~<<~     | \ll                   |
+| ~<=~     | \leq                   |
+| ~<>~     | \diamond                   |
 | ~=<~     | \impliedby          |
 | ~==~     | &=                  |
 | ~=>~     | \implies            |
-| ~>=~     | \geq                |
-| ~>>~     | \gg                 |
-| ~AA~     | \forall             |
-| ~EE~     | \exists             |
+| ~>=~     | \geq                   |
+| ~>>~     | \gg                   |
+| ~AA~     | \forall                   |
+| ~EE~     | \exists                   |
 | ~cb~     | ^3                  |
 | ~iff~    | \iff                |
-| ~inn~    | \in                 |
-| ~notin~  | \not\in             |
+| ~inn~    | \in                   |
+| ~notin~  | \not\in                  |
 | ~sr~     | ^2                  |
-| ~xx~     | \times              |
+| ~xx~     | \times                   |
 | ~❘->~    | \mapsto             |
 | ~❘❘~     | \mid                |
-| ~∽=~     | \approx             |
-| ~∽∽~     | \sim                |
+| ~∽=~     | \approx                   |
+| ~∽∽~     | \sim                   |
 | ~arccos~ | \arccos             |
 | ~arccot~ | \arccot             |
 | ~arccot~ | \arccot             |
@@ -84,9 +87,9 @@ enough, but in any case you can also view this file from emacs:
 | ~exp~    | \exp                |
 | ~ln~     | \ln                 |
 | ~log~    | \log                |
-| ~perp~   | \perp               |
+| ~perp~   | \perp                   |
 | ~sin~    | \sin                |
-| ~star~   | \star               |
+| ~star~   | \star                   |
 | ~gcd~    | \gcd                |
 | ~min~    | \min                |
 | ~max~    | \max                |
@@ -98,133 +101,133 @@ enough, but in any case you can also view this file from emacs:
 | ~QQ~     | \QQ                 |
 | ~RR~     | \RR                 |
 | ~ZZ~     | \ZZ                 |
-| ~;a~     | \alpha              |
-| ~;A~     | \forall             |
-| ~;;A~    | \aleph              |
-| ~;b~     | \beta               |
+| ~;a~     | \alpha                   |
+| ~;A~     | \forall                   |
+| ~;;A~    | \aleph                   |
+| ~;b~     | \beta                   |
 | ~;;;c~   | \cos                |
 | ~;;;C~   | \arccos             |
-| ~;d~     | \delta              |
-| ~;;d~    | \partial            |
-| ~;D~     | \Delta              |
-| ~;;D~    | \nabla              |
-| ~;e~     | \epsilon            |
-| ~;;e~    | \varepsilon         |
+| ~;d~     | \delta                   |
+| ~;;d~    | \partial                   |
+| ~;D~     | \Delta                   |
+| ~;;D~    | \nabla                   |
+| ~;e~     | \epsilon                   |
+| ~;;e~    | \varepsilon                   |
 | ~;;;e~   | \exp                |
-| ~;E~     | \exists             |
+| ~;E~     | \exists                   |
 | ~;;;E~   | \ln                 |
-| ~;f~     | \phi                |
-| ~;;f~    | \varphi             |
-| ~;F~     | \Phi                |
-| ~;g~     | \gamma              |
+| ~;f~     | \phi                   |
+| ~;;f~    | \varphi                   |
+| ~;F~     | \Phi                   |
+| ~;g~     | \gamma                   |
 | ~;;;g~   | \lg                 |
-| ~;G~     | \Gamma              |
-| ~;;;G~   | 10^{?}              |
-| ~;h~     | \eta                |
-| ~;;h~    | \hbar               |
-| ~;i~     | \in                 |
-| ~;;i~    | \imath              |
-| ~;I~     | \iota               |
+| ~;G~     | \Gamma                   |
+| ~;;;G~   | 10^{?}                 |
+| ~;h~     | \eta                   |
+| ~;;h~    | \hbar                   |
+| ~;i~     | \in                   |
+| ~;;i~    | \imath                   |
+| ~;I~     | \iota                   |
 | ~;;I~    | \Im                 |
-| ~;;j~    | \jmath              |
-| ~;k~     | \kappa              |
-| ~;l~     | \lambda             |
-| ~;;l~    | \ell                |
+| ~;;j~    | \jmath                   |
+| ~;k~     | \kappa                   |
+| ~;l~     | \lambda                   |
+| ~;;l~    | \ell                   |
 | ~;;;l~   | \log                |
-| ~;L~     | \Lambda             |
-| ~;m~     | \mu                 |
-| ~;n~     | \nu                 |
+| ~;L~     | \Lambda                   |
+| ~;m~     | \mu                   |
+| ~;n~     | \nu                   |
 | ~;;;n~   | \ln                 |
-| ~;N~     | \nabla              |
+| ~;N~     | \nabla                   |
 | ~;;;N~   | \exp                |
-| ~;o~     | \omega              |
-| ~;O~     | \Omega              |
-| ~;;O~    | \mho                |
-| ~;p~     | \pi                 |
-| ~;;p~    | \varpi              |
-| ~;P~     | \Pi                 |
-| ~;q~     | \theta              |
-| ~;;q~    | \vartheta           |
-| ~;Q~     | \Theta              |
-| ~;r~     | \rho                |
+| ~;o~     | \omega                   |
+| ~;O~     | \Omega                   |
+| ~;;O~    | \mho                   |
+| ~;p~     | \pi                   |
+| ~;;p~    | \varpi                   |
+| ~;P~     | \Pi                   |
+| ~;q~     | \theta                   |
+| ~;;q~    | \vartheta                   |
+| ~;Q~     | \Theta                   |
+| ~;r~     | \rho                   |
 | ~;;r~    | \varrho             |
 | ~;;R~    | \Re                 |
-| ~;s~     | \sigma              |
-| ~;;s~    | \varsigma           |
+| ~;s~     | \sigma                   |
+| ~;;s~    | \varsigma                   |
 | ~;;;s~   | \sin                |
-| ~;S~     | \Sigma              |
+| ~;S~     | \Sigma                   |
 | ~;;;S~   | \arcsin             |
-| ~;t~     | \tau                |
+| ~;t~     | \tau                   |
 | ~;;;t~   | \tan                |
 | ~;;;T~   | \arctan             |
-| ~;u~     | \upsilon            |
-| ~;U~     | \Upsilon            |
-| ~;v~     | \vee                |
-| ~;V~     | \Phi                |
-| ~;w~     | \xi                 |
-| ~;W~     | \Xi                 |
-| ~;x~     | \chi                |
-| ~;y~     | \psi                |
-| ~;Y~     | \Psi                |
-| ~;z~     | \zeta               |
-| ~;0~     | \emptyset           |
-| ~;8~     | \infty              |
-| ~;!~     | \neg                |
-| ~;^~     | \uparrow            |
-| ~;&~     | \wedge              |
-| ~;∽~     | \approx             |
-| ~;;∽~    | \simeq              |
-| ~;_~     | \downarrow          |
-| ~;+~     | \cup                |
-| ~;-~     | \leftrightarrow     |
+| ~;u~     | \upsilon                   |
+| ~;U~     | \Upsilon                   |
+| ~;v~     | \vee                   |
+| ~;V~     | \Phi                   |
+| ~;w~     | \xi                   |
+| ~;W~     | \Xi                   |
+| ~;x~     | \chi                   |
+| ~;y~     | \psi                   |
+| ~;Y~     | \Psi                   |
+| ~;z~     | \zeta                   |
+| ~;0~     | \emptyset                   |
+| ~;8~     | \infty                   |
+| ~;!~     | \neg                   |
+| ~;^~     | \uparrow                   |
+| ~;&~     | \wedge                   |
+| ~;∽~     | \approx                   |
+| ~;;∽~    | \simeq                   |
+| ~;_~     | \downarrow                   |
+| ~;+~     | \cup                   |
+| ~;-~     | \leftrightarrow                   |
 | ~;;-~    | \longleftrightarrow |
-| ~;*~     | \times              |
-| ~;/~     | \not                |
+| ~;*~     | \times                   |
+| ~;/~     | \not                   |
 | ~;❘~     | \mapsto             |
 | ~;;❘~    | \longmapsto         |
-| ~;\~     | \setminus           |
-| ~;=~     | \Leftrightarrow     |
+| ~;\~     | \setminus                   |
+| ~;=~     | \Leftrightarrow                   |
 | ~;;=~    | \Longleftrightarrow |
-| ~;(~     | \langle             |
-| ~;)~     | \rangle             |
-| ~;[~     | \Leftarrow          |
+| ~;(~     | \langle                   |
+| ~;)~     | \rangle                   |
+| ~;[~     | \Leftarrow                   |
 | ~;;[~    | \Longleftarrow      |
-| ~;]~     | \Rightarrow         |
+| ~;]~     | \Rightarrow                   |
 | ~;;]~    | \Longrightarrow     |
-| ~;{~     | \subset             |
-| ~;}~     | \supset             |
-| ~;<~     | \leftarrow          |
+| ~;{~     | \subset                   |
+| ~;}~     | \supset                   |
+| ~;<~     | \leftarrow                   |
 | ~;;<~    | \longleftarrow      |
 | ~;;;<~   | \min                |
-| ~;>~     | \rightarrow         |
+| ~;>~     | \rightarrow                   |
 | ~;;>~    | \longrightarrow     |
 | ~;;;>~   | \max                |
-| ~;'~     | \prime              |
-| ~;.~     | \cdot               |
+| ~;'~     | \prime                   |
+| ~;.~     | \cdot                   |
 
 
 
 ** Annoying Subscripts
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-subscript-snippets)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 : Automatic subscripts! Expand In math and after a single letter.
 
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-snippet-array laas-subscript-snippets)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 | ~ii~  | X_i, or X_{Yi} if a subscript was typed already |
-| ~ip1~ | _{i+1}                                          |
+| ~ip1~ | _{i+1}                                       |
 | ~jj~  | X_j, or X_{Yj} if a subscript was typed already |
-| ~jp1~ | _{j+1}                                          |
+| ~jp1~ | _{j+1}                                       |
 | ~nn~  | X_n, or X_{Yn} if a subscript was typed already |
-| ~np1~ | _{n+1}                                          |
+| ~np1~ | _{n+1}                                       |
 | ~kk~  | X_k, or X_{Yk} if a subscript was typed already |
-| ~kp1~ | _{k+1}                                          |
+| ~kp1~ | _{k+1}                                       |
 | ~0~   | X_0, or X_{Y0} if a subscript was typed already |
 | ~1~   | X_1, or X_{Y1} if a subscript was typed already |
 | ~2~   | X_2, or X_{Y2} if a subscript was typed already |
@@ -237,40 +240,40 @@ enough, but in any case you can also view this file from emacs:
 | ~9~   | X_9, or X_{Y9} if a subscript was typed already |
 
 
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-frac-snippet)
-#+END_SRC
+#+end_src
 
 ** The infamous fraction
 #+RESULTS:
 : Frac snippet. Expand in maths when there~s something to frac on on the left.
 
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-snippet-array laas-frac-snippet)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 | ~/~ | Wrap object on the left with \frac{}{}, leave `point' in the denuminator. |
 
 
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-accent-snippets)
-#+END_SRC
+#+end_src
 
 
 ** Simpler Accents
 #+RESULTS:
 : A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.
 
-#+BEGIN_SRC emacs-lisp :exports results
+#+begin_src emacs-lisp :exports results
 (aas--format-snippet-array laas-accent-snippets)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 | ~.␣~  | Wrap in \dot{}      |
 | ~..␣~ | Wrap in \dot{}      |
 | ~,.~  | Wrap in \vec{}      |
 | ~.,~  | Wrap in \vec{}      |
-| ~∽␣~  | Wrap in \tilde{}    |
+| ~∽␣~  | Wrap in \tilde{}           |
 | ~hat~ | Wrap in \hat{}      |
 | ~bar~ | Wrap in \overline{} |
