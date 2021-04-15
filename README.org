@@ -71,6 +71,7 @@ enough, but in any case you can also view this file from emacs:
 | ~sr~     | ^2                  |
 | ~xx~     | \times                   |
 | ~❘->~    | \mapsto             |
+| ~❘=~     | \models             |
 | ~❘❘~     | \mid                |
 | ~∽=~     | \approx                   |
 | ~∽∽~     | \sim                   |
