@@ -5,8 +5,8 @@
 ;; Authors: Yoav Marco <https://github.com/yoavm448> TEC <https://github.com/tecosaur>
 ;; Maintainer: Yoav Marco <yoavm448@gmail.com>
 ;; Created: September 22, 2020
-;; Modified: February 13, 2021
-;; Version: 0.2
+;; Modified: April 17, 2021
+;; Version: 1.0
 ;; Keywords: tools, tex
 ;; Homepage: https://github.com/tecosaur/LaTeX-auto-activating-snippets
 ;; Package-Requires: ((emacs "26.3") (auctex "11.88") (aas "0.2") (yasnippet "0.14"))
