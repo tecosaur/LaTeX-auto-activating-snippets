@@ -59,13 +59,11 @@ insert a new subscript (e.g a -> a_1)."
 
 (defun laas-mathp ()
   "Determine whether point is within a LaTeX maths block."
-
-  (let ((modes (aas--modes-to-activate major-mode)))
-    (cond
-     ((memq 'latex-mode modes) (texmathp))
-     ((memq 'org-mode modes) (laas-org-mathp))
-     (_ (message "LaTeX auto-activated snippets does not currently support any of %s" modes)
-        nil))))
+  (cond
+   ((derived-mode-p 'latex-mode) (texmathp))
+   ((derived-mode-p 'org-mode) (laas-org-mathp))
+   (_ (message "LaTeX auto-activated snippets does not currently support any of %s" modes)
+      nil)))
 
 (declare-function org-element-at-point "org-element")
 (declare-function org-element-type "org-element")
