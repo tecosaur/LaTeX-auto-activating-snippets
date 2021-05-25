@@ -127,8 +127,6 @@ insert a new subscript (e.g a -> a_1)."
   (interactive)
   (let ((start (laas-identify-adjacent-tex-object)))
     (insert "}")
-    (when (aref aas-transient-snippet-key (1- (length aas-transient-snippet-key)))
-      (insert " "))
     (save-excursion
       (goto-char start)
       (insert (concat "\\" tex-command "{")))))
