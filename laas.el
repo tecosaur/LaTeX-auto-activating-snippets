@@ -55,7 +55,8 @@ insert a new subscript (e.g a -> a_1)."
      (backward-char)
      (insert "{")
      (forward-char)
-     (insert s "}"))))
+     (insert s "}")
+     (backward-char))))
 
 (defun laas-mathp ()
   "Determine whether point is within a LaTeX maths block."
