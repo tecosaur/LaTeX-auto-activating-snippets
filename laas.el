@@ -137,7 +137,7 @@ insert a new subscript (e.g a -> a_1)."
   (and (or (<= ?a (char-before) ?z)
            (<= ?A (char-before) ?Z)
            (<= ?0 (char-before) ?9)
-           (memq (char-before) '(?\) ?\] ?})))
+           (memq (char-before) '(?\) ?\] ?} ?/)))
        (laas-mathp)))
 
 ;; HACK Smartparens runs after us on the global `post-self-insert-hook' and
@@ -170,16 +170,19 @@ it is restored only once."
   (let* ((tex-obj (laas-identify-adjacent-tex-object))
          (start (save-excursion
                   ;; if bracketed, delete outermost brackets
-                  (if (memq (char-before) '(?\) ?\]))
+                  (if (memq (char-before) '(?\) ?\] ?/))
                       (progn
                         (backward-delete-char 1)
-                        (goto-char tex-obj)
-                        (delete-char 1))
+                        (and tex-obj
+                             (goto-char tex-obj)
+                             (delete-char 1)))
                     (goto-char tex-obj))
                   (point)))
          (end (point))
-         (content (buffer-substring-no-properties start end)))
-    (yas-expand-snippet (format "\\frac{%s}{$1}$0" content)
+         (content (if tex-obj
+                      (buffer-substring-no-properties start end)
+                    "$1")))
+    (yas-expand-snippet (format "\\frac{%s}{$2}$0" content)
                         start end))
   (laas--shut-up-smartparens))
 
