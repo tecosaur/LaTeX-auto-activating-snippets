@@ -383,8 +383,10 @@ it is restored only once."
   "A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.")
 
 (defun laas--no-backslash-before-point? ()
-  "Check that the char before `point' is not a backslash."
-  (/= (char-before) ?\\))
+  "Check that the char preceding the snippet key is not backslash."
+  ;; conditions are already run right at the start of the snippet key, no need
+  ;; to move point
+  (not (eq (char-before) ?\\)))
 
 
 (apply #'aas-set-snippets 'laas-mode laas-basic-snippets)
