@@ -23,7 +23,11 @@ A chunky set of LaTeX snippets for the [[https://github.com/ymarco/auto-activati
                     "Sum" (lambda () (interactive)
                             (yas-expand-snippet "\\sum_{$1}^{$2} $0"))
                     "Span" (lambda () (interactive)
-                             (yas-expand-snippet "\\Span($1)$0"))))
+                             (yas-expand-snippet "\\Span($1)$0"))
+                    ;; set accent snippets
+                    :cond #'laas-object-on-left-condition
+                    ",." (lambda () (interactive) (laas-wrap-previous-object "vec"))
+                    ".," (lambda () (interactive) (laas-wrap-previous-object "vec"))))
 #+end_src
 
 * Credits
