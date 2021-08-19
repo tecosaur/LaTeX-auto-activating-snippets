@@ -62,7 +62,7 @@ insert a new subscript (e.g a -> a_1)."
   (cond
    ((derived-mode-p 'latex-mode) (texmathp))
    ((derived-mode-p 'org-mode) (laas-org-mathp))
-   (_ (message "LaTeX auto-activated snippets does not currently support any of %s" modes)
+   (t (message "LaTeX auto-activated snippets does not currently support any of %s" modes)
       nil)))
 
 (declare-function org-element-at-point "org-element")
