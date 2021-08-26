@@ -72,9 +72,8 @@ insert a new subscript (e.g a -> a_1)."
 
 (defun laas-org-mathp ()
   "Determine whether the point is within a LaTeX fragment or environment."
-  (let ((element (org-element-at-point)))
-    (or (eq (org-element-type element) 'latex-environment)
-        (eq (org-element-type (org-element-context element)) 'latex-fragment))))
+  (or (org-inside-LaTeX-fragment-p)
+      (eq (org-element-type (org-element-at-point)) 'latex-environment)))
 
 (defun laas-auto-script-condition ()
   "Condition used for auto-sub/superscript snippets."
