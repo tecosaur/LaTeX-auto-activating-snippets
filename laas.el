@@ -164,23 +164,32 @@ it is restored only once."
                   (default-value 'post-self-insert-hook))
       (push #'laas--restore-smartparens-hook (default-value 'post-self-insert-hook)))))
 
+(defun laas-frac-cond ()
+  (cond ((= (char-before) ?/) 'standalone-frac)
+        ((laas-object-on-left-condition) 'wrapping-frac)))
+
 (defun laas-smart-fraction ()
   "Expansion function used for auto-subscript snippets."
   (interactive)
-  (let* ((tex-obj (laas-identify-adjacent-tex-object))
-         (start (save-excursion
-                  ;; if bracketed, delete outermost brackets
-                  (if (memq (char-before) '(?\) ?\]))
-                      (progn
-                        (backward-delete-char 1)
-                        (goto-char tex-obj)
-                        (delete-char 1))
-                    (goto-char tex-obj))
-                  (point)))
-         (end (point))
-         (content (buffer-substring-no-properties start end)))
-    (yas-expand-snippet (format "\\frac{%s}{$1}$0" content)
-                        start end))
+  (pcase aas-transient-snippet-condition-result
+    ('standalone-frac
+     (delete-char -1) ;; delete the previous / that isn't part of the key
+     (yas-expand-snippet "\\frac{$1}{$2}$0"))
+    ('wrapping-frac
+     (let* ((tex-obj (laas-identify-adjacent-tex-object))
+            (start (save-excursion
+                     ;; if bracketed, delete outermost brackets
+                     (if (memq (char-before) '(?\) ?\]))
+                         (progn
+                           (backward-delete-char 1)
+                           (goto-char tex-obj)
+                           (delete-char 1))
+                       (goto-char tex-obj))
+                     (point)))
+            (end (point))
+            (content (buffer-substring-no-properties start end)))
+       (yas-expand-snippet (format "\\frac{%s}{$1}$0" content)
+                           start end))))
   (laas--shut-up-smartparens))
 
 (defvar laas-basic-snippets
@@ -359,10 +368,14 @@ it is restored only once."
   "Automatic subscripts! Expand In math and after a single letter.")
 
 (defvar laas-frac-snippet
-  '(:cond laas-object-on-left-condition
-    :expansion-desc "Wrap object on the left with \\frac{}{}, leave `point' in the denuminator."
+  '(:cond laas-frac-cond
+    :expansion-desc "See the docs of `laas-frac-snippet'"
     "/" laas-smart-fraction)
-  "Frac snippet. Expand in maths when there's something to frac on on the left.")
+  "Frac snippet.
+Expand to a template frac after //, or wrap the object before point if it isn't /.
+
+ab/ => \\frac{ab}{}
+// => \\frac{}{}")
 
 
 (defvar laas-accent-snippets

@@ -250,14 +250,18 @@ enough, but in any case you can also view this file from emacs:
 #+end_src
 
 #+RESULTS:
-: Frac snippet. Expand in maths when there~s something to frac on on the left.
+: Frac snippet.
+: Expand to a template frac after //, or wrap the object before point if it isn~t /.
+:
+: ab/ => \frac{ab}{}
+: // => \frac{}{}
 
 #+begin_src emacs-lisp :exports results
 (aas--format-snippet-array laas-frac-snippet)
 #+end_src
 
 #+RESULTS:
-| ~/~ | Wrap object on the left with \frac{}{}, leave `point' in the denuminator. |
+| ~/~ | See the docs of `laas-frac-snippet' |
 
 
 ** Simpler Accents
