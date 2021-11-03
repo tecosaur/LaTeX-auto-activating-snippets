@@ -244,11 +244,11 @@ enough, but in any case you can also view this file from emacs:
 | ~9~   | X_9, or X_{Y9} if a subscript was typed already |
 
 
+** The infamous fraction
 #+begin_src emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-frac-snippet)
 #+end_src
 
-** The infamous fraction
 #+RESULTS:
 : Frac snippet. Expand in maths when there~s something to frac on on the left.
 
@@ -260,12 +260,11 @@ enough, but in any case you can also view this file from emacs:
 | ~/~ | Wrap object on the left with \frac{}{}, leave `point' in the denuminator. |
 
 
+** Simpler Accents
 #+begin_src emacs-lisp :exports results
 (aas--format-doc-to-org 'laas-accent-snippets)
 #+end_src
 
-
-** Simpler Accents
 #+RESULTS:
 : A simpler way to apply accents. Expand If LaTeX symbol immidiately before point.
 
