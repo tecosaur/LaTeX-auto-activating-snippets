@@ -116,7 +116,7 @@ insert a new subscript (e.g a -> a_1)."
           (<= ?A (char-before) ?Z)
           (<= ?0 (char-before) ?9))
       (backward-word)
-      (when (= (char-before) ?\\) (backward-char))
+      (when (eq (char-before) ?\\) (backward-char))
       (when (memq (char-before) '(?_ ?^ ?.))
         (backward-char)
         (goto-char (laas-identify-adjacent-tex-object))) ; yay recursion
