@@ -255,6 +255,7 @@ it is restored only once."
     "gcd"    "\\gcd"
     "min"    "\\min"
     "max"    "\\max"
+    "eqv"    "\\equiv" ; == is taken and =- too common
 
     "CC" "\\CC"
     "FF" "\\FF"
@@ -317,7 +318,7 @@ it is restored only once."
     ";&"  "\\wedge"
     ";~"  "\\approx"        ";;~" "\\simeq"
     ";_"  "\\downarrow"
-    ";+"  "\\cup"
+    ";+"  "\\cup"           ";;+" "\\oplus"
     ";-"  "\\leftrightarrow"";;-" "\\longleftrightarrow"
     ";*"  "\\times"
     ";/"  "\\not"
@@ -416,6 +417,7 @@ ab/ => \\frac{ab}{}
 (define-minor-mode laas-mode
   "Minor mode for enabling a ton of auto-activating LaTeX snippets."
   :init-value nil
+  :group 'laas
   (if laas-mode
       (progn
         (aas-mode +1)

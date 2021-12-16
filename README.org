@@ -97,6 +97,7 @@ enough, but in any case you can also view this file from emacs:
 | ~gcd~    | \gcd                |
 | ~min~    | \min                |
 | ~max~    | \max                |
+| ~eqv~    | \equiv              |
 | ~CC~     | \CC                 |
 | ~FF~     | \FF                 |
 | ~HH~     | \HH                 |
@@ -184,6 +185,7 @@ enough, but in any case you can also view this file from emacs:
 | ~;_~     | \downarrow                   |
 | ~;+~     | \cup                   |
 | ~;-~     | \leftrightarrow                   |
+| ~;;+~    | \oplus              |
 | ~;;-~    | \longleftrightarrow |
 | ~;*~     | \times                   |
 | ~;/~     | \not                   |
