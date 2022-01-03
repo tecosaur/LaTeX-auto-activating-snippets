@@ -165,7 +165,7 @@ it is restored only once."
       (push #'laas--restore-smartparens-hook (default-value 'post-self-insert-hook)))))
 
 (defun laas-frac-cond ()
-  (cond ((= (char-before) ?/) 'standalone-frac)
+  (cond ((and (= (char-before) ?/) (laas-mathp)) 'standalone-frac)
         ((laas-object-on-left-condition) 'wrapping-frac)))
 
 (defun laas-smart-fraction ()
