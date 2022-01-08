@@ -122,14 +122,32 @@ insert a new subscript (e.g a -> a_1)."
         (goto-char (laas-identify-adjacent-tex-object))) ; yay recursion
       (point)))))
 
-(defun laas-wrap-previous-object (tex-command)
-  "Wrap previous TeX object in TEX-COMMAND."
+(defun laas-wrap-previous-object (tex-cmd)
+  "Wrap previous TeX object in TEX-COMMAND.
+TEX-cmd can be a string like \"textbf\", a cons like
+(\"{\\textstyle\" . \"}\"), or a function that would be called
+and is expected to return a string or cons."
   (interactive)
-  (let ((start (laas-identify-adjacent-tex-object)))
-    (insert "}")
-    (save-excursion
-      (goto-char start)
-      (insert (concat "\\" tex-command "{")))))
+  (let ((start (laas-identify-adjacent-tex-object))
+        left right)
+    (when (functionp tex-cmd)
+      (setq tex-cmd (funcall tex-cmd)))
+    ;; parse tex-cmd to left/right wrappings
+    (cond
+     ((stringp tex-cmd)
+      (setq left (concat "\\" tex-cmd "{")
+            right "}"))
+     ((consp tex-cmd)
+      (setq left (car tex-cmd)
+            right (cdr tex-cmd)))
+     (t
+      (message "Wrong type of `tex-cmd' given to `laas-wrap-previous-object'.")))
+    ;; wrap
+    (when left
+      (insert right)
+      (save-excursion
+        (goto-char start)
+        (insert left)))))
 
 (defun laas-object-on-left-condition ()
   "Return t if there is a TeX object imidiately to the left."
@@ -364,7 +382,7 @@ it is restored only once."
                if (symbolp exp)
                collect :expansion-desc
                and collect (format "X_%s, or X_{Y%s} if a subscript was typed already"
-                               (substring key -1) (substring key -1))
+                                   (substring key -1) (substring key -1))
                collect key collect exp))
   "Automatic subscripts! Expand In math and after a single letter.")
 
@@ -378,18 +396,69 @@ Expand to a template frac after //, or wrap the object before point if it isn't 
 ab/ => \\frac{ab}{}
 // => \\frac{}{}")
 
+(defun laas-latex-accent-cond ()
+  "Return non-nil if also non-math latex accents can be expanded"
+  (or (derived-mode-p 'latex-mode)
+      (laas-mathp)))
 
+(defun laas-accent--rm () (interactive)   (laas-wrap-previous-object (if (laas-mathp) "mathrm" "textrm")))
+(defun laas-accent--it () (interactive)   (laas-wrap-previous-object (if (laas-mathp) "mathit" "textit")))
+(defun laas-accent--bf () (interactive)   (laas-wrap-previous-object (if (laas-mathp) "mathbf" "textbf")))
+(defun laas-accent--emph () (interactive) (laas-wrap-previous-object (if (laas-mathp) "mathem" "emph")))
+(defun laas-accent--tt () (interactive)   (laas-wrap-previous-object (if (laas-mathp) "mathtt" "texttt")))
+(defun laas-accent--sf () (interactive)   (laas-wrap-previous-object (if (laas-mathp) "mathsf" "textsf")))
 (defvar laas-accent-snippets
-  `(:cond laas-object-on-left-condition
-    ,@(cl-loop for (key exp) in '((". " "dot")
-                                  (".. " "dot")
-                                  (",." "vec")
-                                  (".," "vec")
-                                  ("~ " "tilde")
-                                  ("hat" "hat")
-                                  ("bar" "overline"))
+  `(;; work in both normal latex text and math
+    :cond laas-latex-accent-cond
+    :expansion-desc "Wrap in \\mathrm{} or \\textrm{}"     "'r" laas-accent--rm
+    :expansion-desc "Wrap in \\mathit{} or \\textit{}"     "'i" laas-accent--it
+    :expansion-desc "Wrap in \\mathbf{} or \\textbf{}"     "'b" laas-accent--bf
+    :expansion-desc "Wrap in \\mathemph{} or \\textemph{}" "'e" laas-accent--emph
+    :expansion-desc "Wrap in \\mathtt{} or \\texttt{}"     "'y" laas-accent--tt
+    :expansion-desc "Wrap in \\mathsf{} or \\textsf{}"     "'f" laas-accent--sf
+    ;; only normal latex text, no math
+    :cond (lambda () (and (derived-mode-p 'latex-mode) (not (laas-mathp))))
+    :expansion-desc "Wrap in \\textsl"
+    "'l" (lambda () (interactive) (laas-wrap-previous-object "textsl"))
+    ;; only math
+    :cond laas-object-on-left-condition
+    ,@(cl-loop for (key . exp)
+               in '(("'." . "dot")
+                    ("':" . "ddot")
+                    ("'~" . "tilde")
+                    ("'N" . "widetilde")
+                    ("'^" . "hat")
+                    ("'H" . "widehat")
+                    ("'-" . "bar")
+                    ("'T" . "overline")
+                    ("'_" . "underline")
+                    ("'{" . "overbrace")
+                    ("'}" . "underbrace")
+                    ("'>" . "vec")
+                    ("'/" . "grave")
+                    ("'\"". "acute")
+                    ("'v" . "check")
+                    ("'u" . "breve")
+                    ("'m" . "mbox")
+                    ("'c" . "mathcal")
+                    ("'0" . ("{\\textstyle " . "}"))
+                    ("'1" . ("{\\displaystyle " . "}"))
+                    ("'2" . ("{\\scriptstyle " . "}"))
+                    ("'3" . ("{\\scriptscriptstyle " . "}"))
+                    ;; now going outside cdlatex
+                    ("'q" . "sqrt")
+                    ;; "influenced" by Gilles Castel
+                    (".. " . ("\\dot{" . "} "))
+                    (",." . "vec")
+                    (".," . "vec")
+                    ("~ " . ("\\tilde{" . "} "))
+                    ("hat" . "hat")
+                    ("bar" . "overline"))
                collect :expansion-desc
-               collect (format "Wrap in \\%s{}" exp)
+               collect (concat "Wrap in "
+                               (if (consp exp)
+                                   (concat (car exp) (cdr exp))
+                                 (format "\\%s{}" exp)))
                collect key
                ;; re-bind exp so its not changed in the next iteration
                collect (let ((expp exp)) (lambda () (interactive)

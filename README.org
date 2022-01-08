@@ -279,10 +279,39 @@ enough, but in any case you can also view this file from emacs:
 #+end_src
 
 #+RESULTS:
-| ~.␣~  | Wrap in \dot{}      |
-| ~..␣~ | Wrap in \dot{}      |
-| ~,.~  | Wrap in \vec{}      |
-| ~.,~  | Wrap in \vec{}      |
-| ~∽␣~  | Wrap in \tilde{}           |
-| ~hat~ | Wrap in \hat{}      |
-| ~bar~ | Wrap in \overline{} |
+| ~'r~  | Wrap in \mathrm{} or \textrm{}     |
+| ~'i~  | Wrap in \mathit{} or \textit{}     |
+| ~'b~  | Wrap in \mathbf{} or \textbf{}     |
+| ~'e~  | Wrap in \mathemph{} or \textemph{} |
+| ~'y~  | Wrap in \mathtt{} or \texttt{}     |
+| ~'f~  | Wrap in \mathsf{} or \textsf{}     |
+| ~'l~  | Wrap in \textsl                    |
+| ~'.~  | Wrap in \dot{}                     |
+| ~':~  | Wrap in \ddot{}                    |
+| ~'∽~  | Wrap in \tilde{}                   |
+| ~'N~  | Wrap in \widetilde{}               |
+| ~'^~  | Wrap in \hat{}                     |
+| ~'H~  | Wrap in \widehat{}                 |
+| ~'-~  | Wrap in \bar{}                     |
+| ~'T~  | Wrap in \overline{}                |
+| ~'_~  | Wrap in \underline{}               |
+| ~'{~  | Wrap in \overbrace{}               |
+| ~'}~  | Wrap in \underbrace{}              |
+| ~'>~  | Wrap in \vec{}                     |
+| ~'/~  | Wrap in \grave{}                   |
+| ~'"~  | Wrap in \acute{}                   |
+| ~'v~  | Wrap in \check{}                   |
+| ~'u~  | Wrap in \breve{}                   |
+| ~'m~  | Wrap in \mbox{}                    |
+| ~'c~  | Wrap in \mathcal{}                 |
+| ~'0~  | Wrap in {\textstyle }              |
+| ~'1~  | Wrap in {\displaystyle }           |
+| ~'2~  | Wrap in {\scriptstyle }            |
+| ~'3~  | Wrap in {\scriptscriptstyle }      |
+| ~'q~  | Wrap in \sqrt{}                    |
+| ~..␣~ | Wrap in \dot{}                     |
+| ~,.~  | Wrap in \vec{}                     |
+| ~.,~  | Wrap in \vec{}                     |
+| ~∽␣~  | Wrap in \tilde{}                   |
+| ~hat~ | Wrap in \hat{}                     |
+| ~bar~ | Wrap in \overline{}                |
