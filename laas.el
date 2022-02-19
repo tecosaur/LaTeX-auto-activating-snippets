@@ -482,6 +482,12 @@ ab/ => \\frac{ab}{}
   :type 'boolean
   :group 'laas)
 
+(defcustom laas-use-unicode nil
+  "If non-nil, output Unicode symbols instead of LaTeX macros via `laas-unicode'."
+  :type 'boolean
+  :group 'laas)
+
+(declare-function laas-unicode-rewrite "laas-unicode")
 ;;;###autoload
 (define-minor-mode laas-mode
   "Minor mode for enabling a ton of auto-activating LaTeX snippets."
@@ -497,12 +503,20 @@ ab/ => \\frac{ab}{}
         (when laas-enable-auto-space
           (add-hook 'aas-post-snippet-expand-hook
                     #'laas-current-snippet-insert-post-space-if-wanted
-                    nil 'local)))
+                    nil 'local))
+        (when laas-use-unicode
+          (unless (boundp 'laas-unicode-rewrite)
+            (require 'laas-unicode))
+          (add-hook 'aas-pre-snippet-expand-hook
+                    #'laas-unicode-rewrite nil 'local)))
     (aas-deactivate-keymap 'laas-mode)
     (remove-hook 'aas-global-condition-hook #'laas--no-backslash-before-point?
                  'local)
     (remove-hook 'aas-post-snippet-expand-hook
                  #'laas-current-snippet-insert-post-space-if-wanted
+                 'local)
+    (remove-hook 'aas-pre-snippet-expand-hook
+                 #'laas-unicode-rewrite
                  'local)))
 
 (provide 'laas)
