@@ -6,6 +6,7 @@
 ;; Maintainer: Liam Hupfer <liam@hpfr.net>
 ;; Created: February 18, 2022
 ;; Modified: February 18, 2022
+;; Version: 1.1
 ;; Keywords: convenience extensions tex
 ;; Homepage: https://github.com/tecosaur/LaTeX-auto-activating-snippets
 ;; Package-Requires: ((emacs "25.1") (math-symbol-lists "1.3") (laas "1.0") (aas "1.1")

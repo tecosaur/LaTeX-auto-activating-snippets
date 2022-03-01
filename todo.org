@@ -19,7 +19,7 @@ So users can easily undo expansions. Maybe even bind DEL in a transient map
 after expansions to undo expansions.
 
 Look at ~buffer-undo-list~ and how smartparens does it.
-** STRT Org table <-> elisp code pipeline
+** DONE Org table <-> elisp code pipeline
 The table -> code is preferable I think. Currently we have code -> table but
 we'd need to separate into separate vars holding snippet list source in order to
 format it to separate tables.
@@ -35,5 +35,5 @@ Sometimes ~texmathp~ isn't enough. Too many words contain the letters "to" to ha
 it expand to ~\to~ unconditionally in maths.
 ** Snippets for envs?
 I'm not sure how much better we can do in this case compared to just yasnippet.
-** Separating the engine from snippets
+** DONE Separating the engine from snippets
 The Yasnippet route

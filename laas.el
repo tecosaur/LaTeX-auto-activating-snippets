@@ -5,11 +5,11 @@
 ;; Authors: Yoav Marco <https://github.com/yoavm448> TEC <https://github.com/tecosaur>
 ;; Maintainer: Yoav Marco <yoavm448@gmail.com>
 ;; Created: September 22, 2020
-;; Modified: April 17, 2021
-;; Version: 1.0
+;; Modified: February 20, 2022
+;; Version: 1.1
 ;; Keywords: tools, tex
 ;; Homepage: https://github.com/tecosaur/LaTeX-auto-activating-snippets
-;; Package-Requires: ((emacs "26.3") (auctex "11.88") (aas "0.2") (yasnippet "0.14"))
+;; Package-Requires: ((emacs "26.3") (auctex "11.88") (aas "1.1") (yasnippet "0.14"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 ;;
 ;; This file is not part of GNU Emacs.
@@ -27,7 +27,7 @@
 (require 'yasnippet)
 
 (defgroup laas nil
-  "Snippet expansions mid-typing."
+  "LaTeX snippets that expand mid-typing."
   :prefix "laas-"
   :group 'aas)
 
@@ -391,7 +391,8 @@ it is restored only once."
     :expansion-desc "See the docs of `laas-frac-snippet'"
     "/" laas-smart-fraction)
   "Frac snippet.
-Expand to a template frac after //, or wrap the object before point if it isn't /.
+Expand to a template frac after //, or wrap the object before point if it
+isn't /.
 
 ab/ => \\frac{ab}{}
 // => \\frac{}{}")
@@ -488,6 +489,7 @@ ab/ => \\frac{ab}{}
   :group 'laas)
 
 (declare-function laas-unicode-rewrite "laas-unicode")
+
 ;;;###autoload
 (define-minor-mode laas-mode
   "Minor mode for enabling a ton of auto-activating LaTeX snippets."
