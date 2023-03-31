@@ -145,7 +145,7 @@ and is expected to return a string or cons."
      (t
       (message "Wrong type of `tex-cmd' given to `laas-wrap-previous-object'.")))
     ;; wrap
-    (when left
+    (when (and left start)
       (insert right)
       (save-excursion
         (goto-char start)
