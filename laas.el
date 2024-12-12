@@ -84,6 +84,7 @@ insert a new subscript (e.g a -> a_1)."
         ((and (or (= (char-before (1- (point))) ?_)
                   (= (char-before (1- (point))) ?^))
               (/= (char-before) ?{))
+              (laas-mathp)
          'extended-sub)
         ((and
           ;; Before is some indexable char
